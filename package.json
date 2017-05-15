@@ -1,0 +1,19 @@
+{
+  "name": "easynima-api",
+  "version": "1.0.0",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "koa": "^2.2.0",
+    "koa-logger": "^2.0.1",
+    "koa-router": "^7.1.1",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "superagent": "^3.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "engines": {
+    "node": "^7.6.0"
+  }
+}
