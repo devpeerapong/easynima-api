@@ -1,13 +1,11 @@
 const KoaRouter = require('koa-router')
-const MovieRouter = require('./MovieRouter')
-const CinemaRouter = require('./CinemaRouter')
+const MovieRouter = require('./router/MovieRouter')
+const CinemaRouter = require('./router/CinemaRouter')
 
-const ApiRouter = new KoaRouter({
-  prefix: '/api'
-})
+const Router = new KoaRouter()
 
-ApiRouter
+Router
   .use('/cinemas', CinemaRouter.routes(), CinemaRouter.allowedMethods())
   .use('/movies', MovieRouter.routes(), MovieRouter.allowedMethods())
 
-module.exports = ApiRouter
+module.exports = Router

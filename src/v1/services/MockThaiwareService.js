@@ -1,5 +1,5 @@
 const request = require('request-promise')
-const { movie, showtime, cinema, theater } = require('../../html')
+const { movie, showtime, cinema, theater } = require('../../../html')
 
 class MockThaiwareService {
   static nowShowing() {

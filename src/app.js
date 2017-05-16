@@ -1,6 +1,6 @@
 const Koa = require('koa')
 const Logger = require('koa-logger')
-const Router = require('./router/ApiRouter')
+const Router = require('./router')
 
 const app = new Koa()
 
@@ -14,4 +14,4 @@ app.use(Router.routes())
 
 app.listen(process.env.PORT || 3000)
 
-console.log('Server running at port: ' + process.env.PORT)
+console.log('Server running at port: ' + (process.env.PORT || 3000))

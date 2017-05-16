@@ -8,7 +8,7 @@ set routes \
         cinemas \
         cinemaMovies
 
-set hostname http://localhost:3000/api
+set hostname http://localhost:3000/api/v1
 set movies $hostname/movies
 set movieCinema $hostname/movies/995/cinemas
 set movieCinemaAvailable $hostname/movies/995/cinemas/available
