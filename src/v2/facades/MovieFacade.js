@@ -49,19 +49,42 @@ class MovieFacade {
 
     return {
       duration: cinemas.length === 0 ? '' : cinemas[0].duration,
-      theaters: Array.prototype.concat
-        .apply(
-          [],
-          cinemas.map(cinema => cinema.theaters.map(TheaterPresenter.apply))
-        )
+      theaters: cinemas
+        .flatMap(cinema => cinema.theaters.map(TheaterPresenter.apply))
         .filter(theater => theater.showtimes.length)
     }
   }
 
-  static async findSeats(id) {
-    const seats = await MajorCineplexService.seat(id)
+  static async findTickets(id) {
+    const { seats, tickets } = await MajorCineplexService.seat(id)
 
-    return seats
+    const seatsRemaining = seats
+      .filter(row => row.Name !== '')
+      .flatMap(row => row.Columns)
+      .filter(seat => !Array.isArray(seat))
+      .filter(seat => seat.Status === 'Empty')
+      .map(seat => seat.AreaCategoryCode)
+      .reduce((seats, areaNo) => {
+        if (!seats[areaNo]) {
+          seats[areaNo] = 1
+        } else {
+          seats[areaNo]++
+        }
+
+        return seats
+      }, {})
+
+    return tickets
+      .map(t => ({
+        name: t.Ticket,
+        member_type: t.Ticket.includes('M-Gen') ? 'mgen' : 'normal',
+        type: t.SeatType || t.Ticket,
+        price: t.Price,
+        area: t.AreaCategoryCode,
+        remaining: seatsRemaining[t.AreaCategoryCode]
+      }))
+      .sort((a, b) => Number(a.price) > Number(b.price))
+      .groupBy('member_type')
   }
 }
 

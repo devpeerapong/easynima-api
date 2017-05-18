@@ -1,3 +1,5 @@
+require('./polyfill')
+
 const Koa = require('koa')
 const Logger = require('koa-logger')
 const Router = require('./router')

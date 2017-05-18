@@ -12,8 +12,7 @@ const API_HOSTNAME = 'http://www.majorcineplex.com'
 
 class MajorCineplexService {
   static async movieShowing() {
-    // const response = await mock(majorMovie)
-    const response = await agent.get(this.path('movie', 'ajax_movie_showing'))
+    const response = await mock(majorMovie)
     const html = response.text
     const $movieList = parseHTML(html)('.eachMoviequick')
 
@@ -31,8 +30,7 @@ class MajorCineplexService {
   }
 
   static async comingSoon() {
-    // const response = await mock(majorMovieComingSoon)
-    const response = await agent.get(this.path('movies'))
+    const response = await mock(majorMovieComingSoon)
     const html = response.text
     const $movieList = parseHTML(html)('.movie_coming_soon_panel')
 
@@ -40,12 +38,7 @@ class MajorCineplexService {
   }
 
   static async showtime(movie_text, cinema_text) {
-    // const response = await mock(majorMovieShowtime)
-    const response = await agent
-      .post(this.path('ajaxbooking', 'ajax_showtime'))
-      .withCredentials()
-      .type('form')
-      .send({ movie_text, cinema_text })
+    const response = await mock(majorMovieShowtime)
 
     const html = `<body>${response.text}</body>`
     const $showtimeList = parseHTML(html)('body')

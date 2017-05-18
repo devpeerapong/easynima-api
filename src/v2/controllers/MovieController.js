@@ -29,10 +29,10 @@ class MovieController {
     ctx.body = theaters
   }
 
-  static async seats (ctx) {
+  static async tickets (ctx) {
     const { id } = ctx.params
 
-    const seats = await MovieFacade.findSeats(id)
+    const seats = await MovieFacade.findTickets(id)
 
     ctx.body = seats
   }
