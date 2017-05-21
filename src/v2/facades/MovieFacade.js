@@ -16,17 +16,13 @@ const DEFAULT_CINEMA = [
 
 class MovieFacade {
   static async feed() {
-    const [{ nowShowing, advanceBooking }, comingSoonAll] = await Promise.all([
-      MajorCineplexService.movieShowing(),
-      MajorCineplexService.comingSoon()
+    const [{ nowShowing, advanceBooking }] = await Promise.all([
+      MajorCineplexService.movieShowing()
     ])
-
-    const [comingSoon, ..._] = comingSoonAll
 
     return {
       nowShowing,
-      advanceBooking,
-      comingSoon: comingSoon.movies
+      advanceBooking
     }
   }
 
