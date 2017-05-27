@@ -2,10 +2,12 @@ require('./polyfill')
 
 const Koa = require('koa')
 const Logger = require('koa-logger')
+const cors = require('kcors')
 const Router = require('./router')
 
 const app = new Koa()
 
+app.use(cors())
 app.use(Logger())
 app.use(async (ctx, next) => {
   await next();
